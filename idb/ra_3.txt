@@ -1,0 +1,1 @@
+<P>[cust_id,name](<S>[cust_id=customer](Customers<X>(<E>(<P>[customer](Loans))<D><E>(<P>[customer](<S>[date<due](<S>[loan=loan_id](Loans<X>Returns))))<D><P>[customer](<S>[date=due](<S>[loan=loan_id](Loans<X>Returns))))));

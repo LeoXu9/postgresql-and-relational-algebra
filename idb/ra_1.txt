@@ -1,0 +1,1 @@
+<E>(<P>[customer, branch](<S>[copy=copy_id&customer=cust_id](Loans<X><S>[branch=branchCopies](Customers<X><R>[branch->branchCopies](Copies))))<D><P>[customer, branch](<S>[copy=copy_id&customer=cust_id](Loans<X><S>[~(branch=branchCopies)](Customers<X><R>[branch->branchCopies](Copies)))));

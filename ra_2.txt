@@ -1,0 +1,28 @@
+customers who have borrowed books:
+<E>(<P>[customer](Loans));
+
+customers who returned on time:
+<S>[date<due](<S>[loan=loan_id](Loans<X>Returns));
+<P>[customer,loan_id,copy,start,due](<S>[date<due](<S>[loan=loan_id](Loans<X>Returns)));
+<P>[customer](<S>[date=due](<S>[loan=loan_id](Loans<X>Returns)));
+
+
+customers who never returned:
+
+Loans join Returns:
+<S>[loan=loan_id](Loans<X>Returns);
+
+project above:
+<P>[loan_id,copy,customer,start,due](<S>[loan=loan_id](Loans<X>Returns));
+
+Loans - above = Loans that have not been returned>:
+Loans<D><P>[loan_id,copy,customer,start,due](<S>[loan=loan_id](Loans<X>Returns));
+
+What we want:
+Loans<D><P>[customer,loan_id,copy,start,due](<S>[start<date&date<due](<S>[loan=loan_id](Loans<X>Returns)));
+
+customers who have returned:
+<E>(<P>[customer](<S>[date<due](<S>[loan=loan_id](Loans<X>Returns))));
+
+Answer:
+<P>[cust_id,name](<S>[cust_id=customer](Customers<X>(<E>(<P>[customer](Loans))<D><E>(<P>[customer](<S>[date<due](<S>[loan=loan_id](Loans<X>Returns))))<D><P>[customer](<S>[date=due](<S>[loan=loan_id](Loans<X>Returns))))));

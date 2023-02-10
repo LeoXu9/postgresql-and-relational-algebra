@@ -1,0 +1,45 @@
+loans that have not been returned：
+Loans<D><P>[loan_id,copy,customer,start,due](<S>[loan=loan_id](Loans<X>Returns));
+
+Copies that have not been returned:
+<S>[copy=copy_id](Copies<X>(Loans<D><P>[loan_id,copy,customer,start,due](<S>[loan=loan_id](Loans<X>Returns))));
+
+Copies that have not been returned (projected):
+<P>[copy_id,title,author,branch](<S>[copy=copy_id](Copies<X>(Loans<D><P>[loan_id,copy,customer,start,due](<S>[loan=loan_id](Loans<X>Returns)))));
+
+All available copies now (all copies - copies that have not been returned):
+Copies<D><P>[copy_id,title,author,branch](<S>[copy=copy_id](Copies<X>(Loans<D><P>[loan_id,copy,customer,start,due](<S>[loan=loan_id](Loans<X>Returns)))));
+
+
+All books (compressed):
+<E>(<P>[title,author,branch](Copies));
+
+All available copies now projected (all copies - copies that have not been returned):
+<P>[title,author,branch](Copies<D><P>[copy_id,title,author,branch](<S>[copy=copy_id](Copies<X>(Loans<D><P>[loan_id,copy,customer,start,due](<S>[loan=loan_id](Loans<X>Returns))))));
+
+All available copies compressed:
+<E>(<P>[title,author,branch](Copies<D><P>[copy_id,title,author,branch](<S>[copy=copy_id](Copies<X>(Loans<D><P>[loan_id,copy,customer,start,due](<S>[loan=loan_id](Loans<X>Returns)))))));
+
+1...All books minus all available copies compressed (ineligible): product 1
+<E>(<P>[title,author,branch](Copies))<D><E>(<P>[title,author,branch](Copies<D><P>[copy_id,title,author,branch](<S>[copy=copy_id](Copies<X>(Loans<D><P>[loan_id,copy,customer,start,due](<S>[loan=loan_id](Loans<X>Returns)))))));
+
+Copies projected:
+<P>[author,title,branch](Copies);
+
+2.. Rename:
+<R>[author->author1,title->title1,branch->branch1](<P>[author,title,branch](Copies));
+
+1.. * 2.. :
+(<R>[author->author1,title->title1,branch->branch1](<P>[author,title,branch](Copies)))<X>(<E>(<P>[title,author,branch](Copies))<D><E>(<P>[title,author,branch](Copies<D><P>[copy_id,title,author,branch](<S>[copy=copy_id](Copies<X>(Loans<D><P>[loan_id,copy,customer,start,due](<S>[loan=loan_id](Loans<X>Returns))))))));
+
+
+<S>[author=author1&title=title1]((<R>[author->author1,title->title1,branch->branch1](<P>[author,title,branch](Copies)))<X>(<E>(<P>[title,author,branch](Copies))<D><E>(<P>[title,author,branch](Copies<D><P>[copy_id,title,author,branch](<S>[copy=copy_id](Copies<X>(Loans<D><P>[loan_id,copy,customer,start,due](<S>[loan=loan_id](Loans<X>Returns)))))))));
+
+
+<P>[author,title,branch](<S>[author=author1&title=title1]((<R>[author->author1,title->title1,branch->branch1](<P>[author,title,branch](Copies)))<X>(<E>(<P>[title,author,branch](Copies))<D><E>(<P>[title,author,branch](Copies<D><P>[copy_id,title,author,branch](<S>[copy=copy_id](Copies<X>(Loans<D><P>[loan_id,copy,customer,start,due](<S>[loan=loan_id](Loans<X>Returns))))))))));
+
+<P>[author,title,branch](Copies);
+
+<P>[author,title,branch](Copies)<D><P>[author,title,branch](<S>[author=author1&title=title1]((<R>[author->author1,title->title1,branch->branch1](<P>[author,title,branch](Copies)))<X>(<E>(<P>[title,author,branch](Copies))<D><E>(<P>[title,author,branch](Copies<D><P>[copy_id,title,author,branch](<S>[copy=copy_id](Copies<X>(Loans<D><P>[loan_id,copy,customer,start,due](<S>[loan=loan_id](Loans<X>Returns))))))))));
+
+<E>(<P>[author,title,branch](Copies)<D><P>[author,title,branch](<S>[author=author1&title=title1]((<R>[author->author1,title->title1,branch->branch1](<P>[author,title,branch](Copies)))<X>(<E>(<P>[title,author,branch](Copies))<D><E>(<P>[title,author,branch](Copies<D><P>[copy_id,title,author,branch](<S>[copy=copy_id](Copies<X>(Loans<D><P>[loan_id,copy,customer,start,due](<S>[loan=loan_id](Loans<X>Returns)))))))))));
